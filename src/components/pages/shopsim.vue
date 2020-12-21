@@ -121,7 +121,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              @click="addtoCart(product.id, product.num)"
+              @click="addtocart(product.id, product.num)"
             >
               <!-- <i class="fas fa-spinner fa-spin" v-if="product.id === status.loadingItem"></i> -->
               加到購物車
@@ -167,7 +167,7 @@ export default {
         vm.status.loadingItem = "";
       });
     },
-    addcart(id, qty = 1) {
+    addtocart(id, qty = 1) {
       const vm = this;
       const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       vm.status.loadingItem = id;
