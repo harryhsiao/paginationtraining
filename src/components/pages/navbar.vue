@@ -10,9 +10,37 @@
       />
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
+          <a class="nav-link" href="#" @click.prevent="logout">登出&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i></a>
         </li>
       </ul>
     </nav>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    logout() {
+      const api = `${process.env.APIPATH}/logout`;
+      const vm = this;
+
+      this.$http.post(api).then((response) => {
+        console.log(response.data);
+
+        if (response.data.success) {
+          const token = response.data.token;
+          const expired = response.data.expired;
+          document.cookie = `hexToken = ${token}; expires = ${new Date(
+            expired
+          )}`;
+
+          vm.$router.push("/login");
+        }
+      });
+    },
+  },
+};
+</script>

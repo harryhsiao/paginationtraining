@@ -29,11 +29,11 @@
             ><span v-else>尚未啟用</span>
           </td>
           <td>
-            <img v-bind:src="item.image" alt="產品圖" class="img-fluid w-50" />
+            <img v-bind:src="item.imageUrl" alt="產品圖" class="img-fluid w-50" />
           </td>
           <td>{{ item.title }}</td>
-          <td class="text-right">{{ item.origin_price }}</td>
-          <td>{{ item.price }}</td>
+          <td class="text-right">{{ item.origin_price | currency}}</td>
+          <td>{{ item.price | currency}}</td>
           <td>{{ item.unit }}</td>
           <td>
             <span
@@ -59,7 +59,7 @@
     <!------------ 分頁碼標籤 ------------>
     <!------------ 分頁碼標籤 ------------>
 
-    <pagination :pages="pagination" @emit-page="getproducts"></pagination>
+    <!-- <pagination :pages="pagination" @emit-page="getproducts"></pagination> -->
 
     <!------------ Modal ------------>
     <!------------ Modal ------------>
@@ -292,7 +292,7 @@
 
 <script>
 import $ from "jquery";
-import pagination from '../pagination';
+//import pagination from '../pagination';
 
 export default {
   data() {
@@ -305,9 +305,9 @@ export default {
       status: { uploading: false },
     };
   },
-  components: {
-        pagination,
-    },
+  // components: {
+  //       pagination,
+  //   },
   methods: {
     getproducts(page = 1) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
@@ -318,7 +318,7 @@ export default {
         console.log(response.data);
         vm.isLoading = false;
         vm.products = response.data.products;
-        vm.pagination = response.data.pagination;
+        //vm.pagination = response.data.pagination;
       });
     },
     uploadfile() {

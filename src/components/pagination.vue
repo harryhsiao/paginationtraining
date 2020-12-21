@@ -26,7 +26,7 @@ export default {
     methods: {
         changepage(page) {
             this.$emit('emit-page', page)//傳送page結果回produts.vue，執行getproducts
-        }
+        },
     }
 }
 </script>
